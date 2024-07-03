@@ -1,0 +1,30 @@
+GET http://localhost:3000/golden-raspberry-awards
+
+
+###
+GET http://localhost:3000/golden-raspberry-awards/dce643df-c2fe-4dc5-bb19-73d9ab076088
+
+
+###
+POST http://localhost:3000/golden-raspberry-awards
+Content-Type: application/json
+
+{
+  "year": 1999,
+  "title": "Homem de ferro",
+  "studios": "Marvel",
+  "producers": "",
+  "winner": true
+}
+
+###
+PATCH http://localhost:3000/golden-raspberry-awards/dce643df-c2fe-4dc5-bb19-73d9ab076088
+Content-Type: application/json
+
+{
+  "year": 2000,
+  "title": "Homem de ferro",
+  "studios": "Marvel",
+  "producers": "Carlos Olveira",
+  "winner": true
+}
