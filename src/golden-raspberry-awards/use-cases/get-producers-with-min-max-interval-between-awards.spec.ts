@@ -1,17 +1,19 @@
 import { Test } from '@nestjs/testing';
-import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { describe } from 'node:test';
-import { Repository } from 'typeorm';
 import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
 import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './get-producers-with-min-max-interval-between-awards';
 import { CreateGoldenRaspberryAwardsUseCase } from './create-golden-raspberry-awards';
 import crypto from 'crypto';
 import { FindAllGoldenRaspberryAwardsUseCase } from './find-all-golden-raspberry-awards';
-import { GoldenRaspberryAwardsTypeOrmRepository } from './golden-raspberry-awards.typeorm.repository';
+import {
+  GoldenRaspberryAwardsTypeOrmRepository,
+  IGoldenRaspberryAwardsRepository,
+} from './golden-raspberry-awards.typeorm.repository';
 
 describe('GetProducerLongerIntervalBetweenAwards', () => {
   let useCase: GetProducersWithMinMaxIntervalAwatdsUseCase;
-  let repository: Repository<GoldenRaspberryAward>;
+  let repository: IGoldenRaspberryAwardsRepository;
   let createGolden: CreateGoldenRaspberryAwardsUseCase;
 
   beforeEach(async () => {
@@ -33,7 +35,7 @@ describe('GetProducerLongerIntervalBetweenAwards', () => {
         GoldenRaspberryAwardsTypeOrmRepository,
         {
           provide: 'IGoldenRaspberryAwardsRepository',
-          useClass: GoldenRaspberryAwardsTypeOrmRepository,
+          useExisting: GoldenRaspberryAwardsTypeOrmRepository,
         },
       ],
     }).compile();
@@ -41,12 +43,13 @@ describe('GetProducerLongerIntervalBetweenAwards', () => {
     useCase = module.get<GetProducersWithMinMaxIntervalAwatdsUseCase>(
       GetProducersWithMinMaxIntervalAwatdsUseCase,
     );
-    repository = module.get<Repository<GoldenRaspberryAward>>(
-      getRepositoryToken(GoldenRaspberryAward),
-    );
 
     createGolden = module.get<CreateGoldenRaspberryAwardsUseCase>(
       CreateGoldenRaspberryAwardsUseCase,
+    );
+
+    repository = module.get<IGoldenRaspberryAwardsRepository>(
+      'IGoldenRaspberryAwardsRepository',
     );
   });
 

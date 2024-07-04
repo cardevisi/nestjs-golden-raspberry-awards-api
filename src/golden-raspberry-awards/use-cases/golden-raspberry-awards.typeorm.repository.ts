@@ -8,7 +8,7 @@ export interface IGoldenRaspberryAwardsRepository {
   create(input: GoldenRaspberryAward): Promise<GoldenRaspberryAward>;
   update(id: string, input: GoldenRaspberryAward): Promise<void>;
   remove(id: string): Promise<void>;
-  query(query: string): Promise<GoldenRaspberryAward[]>;
+  query(query: string): Promise<any>;
 }
 
 export class GoldenRaspberryAwardsTypeOrmRepository
@@ -18,7 +18,7 @@ export class GoldenRaspberryAwardsTypeOrmRepository
     @InjectRepository(GoldenRaspberryAward)
     private readonly goldenRaspberryAwardRepository: Repository<GoldenRaspberryAward>,
   ) {}
-  async query(query: string): Promise<GoldenRaspberryAward[]> {
+  async query(query: string): Promise<any> {
     return await this.goldenRaspberryAwardRepository.query(query);
   }
   async findAll(): Promise<GoldenRaspberryAward[]> {

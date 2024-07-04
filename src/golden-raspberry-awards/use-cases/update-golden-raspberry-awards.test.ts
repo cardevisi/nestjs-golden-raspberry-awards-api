@@ -3,21 +3,35 @@ import { UpdateGoldenRaspberryAwardsUseCase } from './update-golden-raspberry-aw
 import { Repository } from 'typeorm';
 import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import {
+  GoldenRaspberryAwardsTypeOrmRepository,
+  IGoldenRaspberryAwardsRepository,
+} from './golden-raspberry-awards.typeorm.repository';
 
 describe('UpdateGoldenRaspberryAwardsUseCase', () => {
   let useCase: UpdateGoldenRaspberryAwardsUseCase;
-  let repository: Repository<GoldenRaspberryAward>;
+  let repository: IGoldenRaspberryAwardsRepository;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [UpdateGoldenRaspberryAwardsUseCase],
+      providers: [
+        UpdateGoldenRaspberryAwardsUseCase,
+        {
+          provide: getRepositoryToken(GoldenRaspberryAward),
+          useValue: Repository,
+        },
+        {
+          provide: 'IGoldenRaspberryAwardsRepository',
+          useClass: GoldenRaspberryAwardsTypeOrmRepository,
+        },
+      ],
     }).compile();
 
     useCase = module.get<UpdateGoldenRaspberryAwardsUseCase>(
       UpdateGoldenRaspberryAwardsUseCase,
     );
-    repository = module.get<Repository<GoldenRaspberryAward>>(
-      getRepositoryToken(GoldenRaspberryAward),
+    repository = module.get<IGoldenRaspberryAwardsRepository>(
+      'IGoldenRaspberryAwardsRepository',
     );
   });
 

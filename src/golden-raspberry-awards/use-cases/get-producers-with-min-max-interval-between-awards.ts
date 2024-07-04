@@ -1,23 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
-import { Repository } from 'typeorm';
+import { Inject, Injectable } from '@nestjs/common';
+import { IGoldenRaspberryAwardsRepository } from './golden-raspberry-awards.typeorm.repository';
 
 @Injectable()
 export class GetProducersWithMinMaxIntervalAwatdsUseCase {
   constructor(
-    @InjectRepository(GoldenRaspberryAward)
-    private readonly goldenRaspberryAwardRepository: Repository<GoldenRaspberryAward>,
+    @Inject('IGoldenRaspberryAwardsRepository')
+    private readonly goldenRaspberryAwardRepository: IGoldenRaspberryAwardsRepository,
   ) {}
 
   async execute() {
-    const queryResult = await this.goldenRaspberryAwardRepository.query(`
-      WITH PreviousYears AS (
+    const queryResultMinMaxIntervals = await this.goldenRaspberryAwardRepository
+      .query(`
+      WITH FollowingYears AS (
         SELECT
           producers,
           title,
           year,
-          LAG(year) OVER (PARTITION BY producers ORDER BY year) AS previous_year
+          LEAD(year) OVER (PARTITION BY producers ORDER BY year) AS following_year
         FROM
           golden_raspberry_awards
       ),
@@ -25,19 +24,19 @@ export class GetProducersWithMinMaxIntervalAwatdsUseCase {
         SELECT
           producers,
           title,
-          year as followingWin,
-          previous_year as previousWin,
-          year - previous_year AS interval
+          year,
+          following_year,
+          following_year - year AS interval
         FROM
-          PreviousYears
+          FollowingYears
         WHERE
-          previous_year IS NOT NULL
+          following_year IS NOT NULL
       ),
       MaxInterval AS (
         SELECT
           producers,
-          previousWin,
-          followingWin,
+          year,
+          following_year,
           MAX(interval) AS max_interval
         FROM
           Intervals
@@ -47,37 +46,33 @@ export class GetProducersWithMinMaxIntervalAwatdsUseCase {
       MinInterval AS (
         SELECT
           producers,
-          previousWin,
-          followingWin,
+          year,
+          following_year,
           MIN(interval) AS min_interval
         FROM
           Intervals
         GROUP BY
           producers
       )
-      -- Resultados Finais
       SELECT
         'Max Interval' AS interval_type,
-        maxline.producers as producer,
-        maxline.previousWin,
-        maxline.followingWin,
-        maxline.max_interval AS interval
+        max.producers as producer,
+        max.year as previousWin, 
+        max.following_year as followingWin,
+        max.max_interval AS interval
       FROM
-        MaxInterval maxline
+        MaxInterval max
       UNION
       SELECT
         'Min Interval' AS interval_type,
-        minline.producers as producer,
-        minline.previousWin,
-        minline.followingWin,
-        minline.min_interval AS interval
+        min.producers as producer,
+        min.year as previousWin,
+        min.following_year as followingWin,
+        min.min_interval AS interval
       FROM
-        MinInterval minline
-      ORDER BY
-        producer ASC;
-    `);
+        MinInterval min`);
 
-    const producersMin = queryResult
+    const producersMinWithInterval = queryResultMinMaxIntervals
       .filter((movie) => movie.interval_type === 'Min Interval')
       .map((movie) => {
         return {
@@ -88,7 +83,7 @@ export class GetProducersWithMinMaxIntervalAwatdsUseCase {
         };
       });
 
-    const producersMax = queryResult
+    const producersMaxWithInterval = queryResultMinMaxIntervals
       .filter((movie) => movie.interval_type === 'Max Interval')
       .map((movie) => {
         return {
@@ -100,8 +95,8 @@ export class GetProducersWithMinMaxIntervalAwatdsUseCase {
       });
 
     return {
-      min: [...producersMin],
-      max: [...producersMax],
+      min: [...producersMinWithInterval],
+      max: [...producersMaxWithInterval],
     };
   }
 }
