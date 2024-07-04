@@ -4,10 +4,14 @@ import { FindOneGoldenRaspBarrelAwardUseCase } from './find-one-golden-raspberry
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import {
+  GoldenRaspberryAwardsTypeOrmRepository,
+  IGoldenRaspberryAwardsRepository,
+} from './golden-raspberry-awards.typeorm.repository';
 
 describe('FindOneGoldenRaspberryAwardsUseCase', () => {
   let useCase: FindOneGoldenRaspBarrelAwardUseCase;
-  let repository: Repository<GoldenRaspberryAward>;
+  let repository: IGoldenRaspberryAwardsRepository;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -17,14 +21,18 @@ describe('FindOneGoldenRaspberryAwardsUseCase', () => {
           provide: getRepositoryToken(GoldenRaspberryAward),
           useClass: Repository,
         },
+        {
+          provide: 'IGoldenRaspberryAwardsRepository',
+          useClass: GoldenRaspberryAwardsTypeOrmRepository,
+        },
       ],
     }).compile();
 
     useCase = module.get<FindOneGoldenRaspBarrelAwardUseCase>(
       FindOneGoldenRaspBarrelAwardUseCase,
     );
-    repository = module.get<Repository<GoldenRaspberryAward>>(
-      getRepositoryToken(GoldenRaspberryAward),
+    repository = module.get<IGoldenRaspberryAwardsRepository>(
+      'IGoldenRaspberryAwardsRepository',
     );
   });
 

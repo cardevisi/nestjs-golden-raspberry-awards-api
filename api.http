@@ -2,7 +2,7 @@ GET http://localhost:3000/golden-raspberry-awards
 
 
 ###
-GET http://localhost:3000/golden-raspberry-awards/dce643df-c2fe-4dc5-bb19-73d9ab076088
+GET http://localhost:3000/golden-raspberry-awards/5613179f-eaa0-4241-a246-511623a9c105
 
 ### get-producer
 GET  http://localhost:3000/golden-raspberry-awards/get-producer-longer-interval-between-awards
