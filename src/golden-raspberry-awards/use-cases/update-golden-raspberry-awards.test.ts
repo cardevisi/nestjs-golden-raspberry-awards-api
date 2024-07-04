@@ -28,7 +28,7 @@ describe('UpdateGoldenRaspberryAwardsUseCase', () => {
   it('should update an award', async () => {
     const updateGoldenRaspberryAwardDto = {
       id: '9a5f6d5d-9a9a-11ed-afa1-0242ac120002',
-      year: '2020',
+      year: 2020,
       title: 'Golden Raspberry Awards 2020',
       studios: 'Columbia Pictures',
       producers: 'Columbia Pictures',

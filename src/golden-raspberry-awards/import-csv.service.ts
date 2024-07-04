@@ -25,7 +25,7 @@ export class ImportCsvService {
             data.title,
             data.studios,
             data.producers,
-            data.winner,
+            data.winner === 'yes' ? true : false,
           );
           GoldenRaspberryAwardsMovies.push(movie);
         })

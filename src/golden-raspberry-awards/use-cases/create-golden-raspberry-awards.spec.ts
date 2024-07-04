@@ -34,7 +34,7 @@ describe('GoldenRaspberryAwardsuseCase', () => {
   it('should create an award', async () => {
     const createGoldenRaspberryAwardDto = {
       id: '9a5f6d5d-9a9a-11ed-afa1-0242ac120002',
-      year: '2022',
+      year: 2022,
       title: 'Title Teste',
       studios: 'Studios Teste',
       producers: 'ProducersTeste',

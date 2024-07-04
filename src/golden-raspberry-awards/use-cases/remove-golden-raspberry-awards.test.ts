@@ -34,9 +34,7 @@ describe('RemoveGoldenRaspberryAwardsUseCase', () => {
 
   it('should remove an award', async () => {
     jest.spyOn(repository, 'delete');
-    const result = await useCase.execute(
-      '9a5f6d5d-9a9a-11ed-afa1-0242ac120002',
-    );
+    await useCase.execute('9a5f6d5d-9a9a-11ed-afa1-0242ac120002');
     expect(repository.delete).toHaveBeenCalled();
   });
 });

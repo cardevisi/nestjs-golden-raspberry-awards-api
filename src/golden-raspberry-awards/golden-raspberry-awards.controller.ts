@@ -15,6 +15,7 @@ import { FindOneGoldenRaspBarrelAwardUseCase } from './use-cases/find-one-golden
 import { RemoveGoldenRaspberryAwardsUseCase } from './use-cases/remove-golden-raspberry-awards';
 import { UpdateGoldenRaspberryAwardsUseCase } from './use-cases/update-golden-raspberry-awards';
 import { UpdateGoldenRaspberryAwardDto } from './dto/update-golden-raspberry-award.dto';
+import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-producers-with-min-max-interval-between-awards';
 
 @Controller('golden-raspberry-awards')
 export class GoldenRaspberryAwardsController {
@@ -24,6 +25,7 @@ export class GoldenRaspberryAwardsController {
     private readonly findOneGoldenRaspberryAwardsUseCase: FindOneGoldenRaspBarrelAwardUseCase,
     private readonly removeGoldenRaspberryAwardsUseCase: RemoveGoldenRaspberryAwardsUseCase,
     private readonly updateGoldenRaspberryAwardsUseCase: UpdateGoldenRaspberryAwardsUseCase,
+    private readonly getProductMinMaxUseCase: GetProducersWithMinMaxIntervalAwatdsUseCase,
   ) {}
 
   @Post()
@@ -36,6 +38,12 @@ export class GoldenRaspberryAwardsController {
   @Get()
   findAll() {
     return this.findAllGoldenRaspberryAwardsUseCase.execute();
+  }
+
+  @Get('get-producer-longer-interval-between-awards')
+  getProducerLongerIntervalBetweenAwards() {
+    console.log('getProducerLongerIntervalBetweenAwards');
+    return this.getProductMinMaxUseCase.execute();
   }
 
   @Get(':id')

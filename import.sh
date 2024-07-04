@@ -1,15 +1,18 @@
 #!/bin/bash
 
 DB_NAME="mydatabase.db"
-TABLE_NAME="users"
-CSV_FILE="data.csv"
+TABLE_NAME="movies"
+CSV_FILE="movielist.csv"
 
 sqlite3 $DB_NAME <<EOF
 DROP TABLE IF EXISTS $TABLE_NAME;
 CREATE TABLE $TABLE_NAME (
     id INTEGER PRIMARY KEY,
-    name TEXT,
-    email TEXT
+    title TEXT,
+    year INTEGER
+    producers TEXT
+    studios TEXT
+    winner BOOLEAN
 );
 .mode csv
 .import $CSV_FILE $TABLE_NAME

@@ -7,7 +7,7 @@ export class GoldenRaspberryAward {
   id: string;
 
   @Column()
-  year: string;
+  year: number;
 
   @Column()
   title: string;
@@ -23,7 +23,7 @@ export class GoldenRaspberryAward {
 
   constructor(
     id: string,
-    year: string,
+    year: number,
     title: string,
     studios: string,
     producers: string,

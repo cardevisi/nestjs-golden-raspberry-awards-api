@@ -36,7 +36,7 @@ describe('FindAllGoldenRaspberryAwardsUseCase', () => {
       const finalAllResult = [
         {
           id: '9a5f6d5d-9a9a-11ed-afa1-0242ac120002',
-          year: '2022',
+          year: 2022,
           title: 'Title Teste',
           studios: 'Studios Teste',
           producers: 'ProducersTeste',
@@ -44,7 +44,7 @@ describe('FindAllGoldenRaspberryAwardsUseCase', () => {
         },
         {
           id: '9a5f6d5d-9a9a-11ed-afa1-0242ac120002',
-          year: '2025',
+          year: 2025,
           title: 'Title teste',
           studios: 'Studios teste',
           producers: 'Producers teste',

@@ -20,8 +20,6 @@ export class UpdateGoldenRaspberryAwardsUseCase {
       input.winner,
     );
 
-    console.log('updateGoldenRaspberryAwardDto', updateGoldenRaspberryAwardDto);
-
     return this.goldenRaspberryAwardRepository.update(
       id,
       updateGoldenRaspberryAwardDto,

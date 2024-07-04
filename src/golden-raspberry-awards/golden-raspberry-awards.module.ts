@@ -8,6 +8,7 @@ import { ImportCsvService } from './import-csv.service';
 import { FindOneGoldenRaspBarrelAwardUseCase } from './use-cases/find-one-golden-raspberry-awards';
 import { RemoveGoldenRaspberryAwardsUseCase } from './use-cases/remove-golden-raspberry-awards';
 import { UpdateGoldenRaspberryAwardsUseCase } from './use-cases/update-golden-raspberry-awards';
+import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-producers-with-min-max-interval-between-awards';
 
 @Module({
   imports: [TypeOrmModule.forFeature([GoldenRaspberryAward])],
@@ -19,6 +20,7 @@ import { UpdateGoldenRaspberryAwardsUseCase } from './use-cases/update-golden-ra
     FindOneGoldenRaspBarrelAwardUseCase,
     RemoveGoldenRaspberryAwardsUseCase,
     UpdateGoldenRaspberryAwardsUseCase,
+    GetProducersWithMinMaxIntervalAwatdsUseCase,
   ],
   exports: [ImportCsvService],
 })

@@ -8,10 +8,11 @@ import { RemoveGoldenRaspberryAwardsUseCase } from './use-cases/remove-golden-ra
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { GoldenRaspberryAward } from './entities/golden-raspberry-award.entity';
+import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-producers-with-min-max-interval-between-awards';
 
 describe('GoldenRaspberryAwardsController', () => {
   let controller: GoldenRaspberryAwardsController;
-  let createGoldenRaspberryAwardUseCase: CreateGoldenRaspberryAwardsUseCase;
+  let useCase: CreateGoldenRaspberryAwardsUseCase;
   let repository: Repository<GoldenRaspberryAward>;
 
   beforeEach(async () => {
@@ -24,6 +25,7 @@ describe('GoldenRaspberryAwardsController', () => {
         CreateGoldenRaspberryAwardsUseCase,
         UpdateGoldenRaspberryAwardsUseCase,
         RemoveGoldenRaspberryAwardsUseCase,
+        GetProducersWithMinMaxIntervalAwatdsUseCase,
         {
           provide: getRepositoryToken(GoldenRaspberryAward),
           useClass: Repository,
@@ -31,10 +33,9 @@ describe('GoldenRaspberryAwardsController', () => {
       ],
     }).compile();
 
-    createGoldenRaspberryAwardUseCase =
-      module.get<CreateGoldenRaspberryAwardsUseCase>(
-        CreateGoldenRaspberryAwardsUseCase,
-      );
+    useCase = module.get<CreateGoldenRaspberryAwardsUseCase>(
+      CreateGoldenRaspberryAwardsUseCase,
+    );
     controller = module.get<GoldenRaspberryAwardsController>(
       GoldenRaspberryAwardsController,
     );
@@ -44,26 +45,25 @@ describe('GoldenRaspberryAwardsController', () => {
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(useCase).toBeDefined();
   });
 
-  it.skip('should create an award', async () => {
+  it('should create an award', async () => {
     const createGoldenRaspberryAwardDto = {
       id: 'Teste',
-      year: '2022',
+      year: 2022,
       title: 'Teste',
       studios: 'Teste',
       producers: 'Teste',
       winner: true,
     };
-    const result = await createGoldenRaspberryAwardUseCase.execute(
-      createGoldenRaspberryAwardDto,
-    );
 
-    jest
-      .spyOn(repository, 'save')
+    repository.save = jest
+      .fn()
       .mockResolvedValue(createGoldenRaspberryAwardDto);
 
-    expect(createGoldenRaspberryAwardUseCase.execute).toBeTruthy();
+    const result = await useCase.execute(createGoldenRaspberryAwardDto);
+    expect(result).toEqual(createGoldenRaspberryAwardDto);
+    expect(repository.save).toHaveBeenCalled();
   });
 });

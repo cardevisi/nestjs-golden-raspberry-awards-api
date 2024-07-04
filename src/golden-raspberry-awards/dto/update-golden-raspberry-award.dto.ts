@@ -5,7 +5,7 @@ export class UpdateGoldenRaspberryAwardDto extends PartialType(
   CreateGoldenRaspberryAwardDto,
 ) {
   id: string;
-  year: string;
+  year: number;
   title: string;
   studios: string;
   producers: string;
