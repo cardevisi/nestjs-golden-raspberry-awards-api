@@ -1,15 +1,13 @@
-import { InjectRepository } from '@nestjs/typeorm';
-import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
-import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { IGoldenRaspberryAwardsRepository } from './golden-raspberry-awards.typeorm.repository';
 
 @Injectable()
 export class FindAllGoldenRaspberryAwardsUseCase {
   constructor(
-    @InjectRepository(GoldenRaspberryAward)
-    private goldenRaspberryAwardRepository: Repository<GoldenRaspberryAward>,
+    @Inject('IGoldenRaspberryAwardsRepository')
+    private goldenRaspberryAwardRepository: IGoldenRaspberryAwardsRepository,
   ) {}
   execute() {
-    return this.goldenRaspberryAwardRepository.find();
+    return this.goldenRaspberryAwardRepository.findAll();
   }
 }

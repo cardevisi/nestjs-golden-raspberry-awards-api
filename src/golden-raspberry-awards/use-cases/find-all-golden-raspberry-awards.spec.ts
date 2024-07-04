@@ -3,11 +3,15 @@ import { FindAllGoldenRaspberryAwardsUseCase } from './find-all-golden-raspberry
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import {
+  GoldenRaspberryAwardsTypeOrmRepository,
+  IGoldenRaspberryAwardsRepository,
+} from './golden-raspberry-awards.typeorm.repository';
 
 describe('FindAllGoldenRaspberryAwardsUseCase', () => {
   describe('execute', () => {
     let useCase: FindAllGoldenRaspberryAwardsUseCase;
-    let repository: Repository<GoldenRaspberryAward>;
+    let repository: IGoldenRaspberryAwardsRepository;
 
     beforeEach(async () => {
       const module: TestingModule = await Test.createTestingModule({
@@ -17,14 +21,19 @@ describe('FindAllGoldenRaspberryAwardsUseCase', () => {
             provide: getRepositoryToken(GoldenRaspberryAward),
             useClass: Repository,
           },
+          {
+            provide: 'IGoldenRaspberryAwardsRepository',
+            useClass: GoldenRaspberryAwardsTypeOrmRepository,
+          },
         ],
       }).compile();
 
       useCase = module.get<FindAllGoldenRaspberryAwardsUseCase>(
         FindAllGoldenRaspberryAwardsUseCase,
       );
-      repository = module.get<Repository<GoldenRaspberryAward>>(
-        getRepositoryToken(GoldenRaspberryAward),
+
+      repository = module.get<IGoldenRaspberryAwardsRepository>(
+        'IGoldenRaspberryAwardsRepository',
       );
     });
 
@@ -52,9 +61,9 @@ describe('FindAllGoldenRaspberryAwardsUseCase', () => {
         },
       ];
 
-      jest.spyOn(repository, 'find').mockResolvedValue(finalAllResult);
+      jest.spyOn(repository, 'findAll').mockResolvedValue(finalAllResult);
       const findAllResult = await useCase.execute();
-      expect(repository.find).toHaveBeenCalled();
+      expect(repository.findAll).toHaveBeenCalled();
       expect(findAllResult).toHaveLength(2);
       expect(findAllResult).toEqual(finalAllResult);
     });
