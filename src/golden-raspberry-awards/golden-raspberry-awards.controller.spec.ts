@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { GoldenRaspberryAward } from './entities/golden-raspberry-award.entity';
 import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-producers-with-min-max-interval-between-awards';
+import { GoldenRaspberryAwardsTypeOrmRepository } from './use-cases/golden-raspberry-awards.typeorm.repository';
 
 describe('GoldenRaspberryAwardsController', () => {
   let controller: GoldenRaspberryAwardsController;
@@ -29,6 +30,10 @@ describe('GoldenRaspberryAwardsController', () => {
         {
           provide: getRepositoryToken(GoldenRaspberryAward),
           useClass: Repository,
+        },
+        {
+          provide: 'IGoldenRaspberryAwardsRepository',
+          useClass: GoldenRaspberryAwardsTypeOrmRepository,
         },
       ],
     }).compile();

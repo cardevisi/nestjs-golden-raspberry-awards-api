@@ -3,18 +3,27 @@ import { CreateGoldenRaspberryAwardsUseCase } from './create-golden-raspberry-aw
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import {
+  GoldenRaspberryAwardsTypeOrmRepository,
+  IGoldenRaspberryAwardsRepository,
+} from './golden-raspberry-awards.typeorm.repository';
 
 describe('GoldenRaspberryAwardsuseCase', () => {
   let useCase: CreateGoldenRaspberryAwardsUseCase;
-  let repository: Repository<GoldenRaspberryAward>;
+  let repository: IGoldenRaspberryAwardsRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CreateGoldenRaspberryAwardsUseCase,
+        GoldenRaspberryAwardsTypeOrmRepository,
         {
           provide: getRepositoryToken(GoldenRaspberryAward),
           useClass: Repository,
+        },
+        {
+          provide: 'IGoldenRaspberryAwardsRepository',
+          useClass: GoldenRaspberryAwardsTypeOrmRepository,
         },
       ],
     }).compile();
@@ -22,8 +31,9 @@ describe('GoldenRaspberryAwardsuseCase', () => {
     useCase = module.get<CreateGoldenRaspberryAwardsUseCase>(
       CreateGoldenRaspberryAwardsUseCase,
     );
-    repository = module.get<Repository<GoldenRaspberryAward>>(
-      getRepositoryToken(GoldenRaspberryAward),
+
+    repository = module.get<IGoldenRaspberryAwardsRepository>(
+      'IGoldenRaspberryAwardsRepository',
     );
   });
 
@@ -42,7 +52,7 @@ describe('GoldenRaspberryAwardsuseCase', () => {
     };
 
     jest
-      .spyOn(repository, 'save')
+      .spyOn(repository, 'create')
       .mockResolvedValue(createGoldenRaspberryAwardDto);
 
     const result = await useCase.execute(createGoldenRaspberryAwardDto);

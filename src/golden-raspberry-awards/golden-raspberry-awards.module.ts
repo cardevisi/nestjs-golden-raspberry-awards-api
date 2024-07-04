@@ -9,6 +9,7 @@ import { FindOneGoldenRaspBarrelAwardUseCase } from './use-cases/find-one-golden
 import { RemoveGoldenRaspberryAwardsUseCase } from './use-cases/remove-golden-raspberry-awards';
 import { UpdateGoldenRaspberryAwardsUseCase } from './use-cases/update-golden-raspberry-awards';
 import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-producers-with-min-max-interval-between-awards';
+import { GoldenRaspberryAwardsTypeOrmRepository } from './use-cases/golden-raspberry-awards.typeorm.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([GoldenRaspberryAward])],
@@ -21,7 +22,12 @@ import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-pro
     RemoveGoldenRaspberryAwardsUseCase,
     UpdateGoldenRaspberryAwardsUseCase,
     GetProducersWithMinMaxIntervalAwatdsUseCase,
+    GoldenRaspberryAwardsTypeOrmRepository,
+    {
+      provide: 'IGoldenRaspberryAwardsRepository',
+      useExisting: GoldenRaspberryAwardsTypeOrmRepository,
+    },
   ],
-  exports: [ImportCsvService],
+  exports: [ImportCsvService, GoldenRaspberryAwardsTypeOrmRepository],
 })
 export class GoldenRaspberryAwardsModule {}

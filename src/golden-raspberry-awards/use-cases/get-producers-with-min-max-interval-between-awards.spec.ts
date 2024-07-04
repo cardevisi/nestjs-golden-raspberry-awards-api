@@ -7,6 +7,7 @@ import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './get-producers-wit
 import { CreateGoldenRaspberryAwardsUseCase } from './create-golden-raspberry-awards';
 import crypto from 'crypto';
 import { FindAllGoldenRaspberryAwardsUseCase } from './find-all-golden-raspberry-awards';
+import { GoldenRaspberryAwardsTypeOrmRepository } from './golden-raspberry-awards.typeorm.repository';
 
 describe('GetProducerLongerIntervalBetweenAwards', () => {
   let useCase: GetProducersWithMinMaxIntervalAwatdsUseCase;
@@ -29,6 +30,11 @@ describe('GetProducerLongerIntervalBetweenAwards', () => {
         CreateGoldenRaspberryAwardsUseCase,
         GetProducersWithMinMaxIntervalAwatdsUseCase,
         FindAllGoldenRaspberryAwardsUseCase,
+        GoldenRaspberryAwardsTypeOrmRepository,
+        {
+          provide: 'IGoldenRaspberryAwardsRepository',
+          useClass: GoldenRaspberryAwardsTypeOrmRepository,
+        },
       ],
     }).compile();
 
