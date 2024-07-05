@@ -11,6 +11,9 @@ export class GetProducersWithMinMaxIntervalAwatdsUseCase {
   ) {}
 
   async execute() {
+    /**
+     * REFACTOR: apply a query builder
+     */
     const queryResultMinMaxIntervals = await this.goldenRaspberryAwardRepository
       .query(`
       WITH FollowingYears AS (
