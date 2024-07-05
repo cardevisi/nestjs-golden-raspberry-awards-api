@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Golden RaspBerry Awards - Challenge - API
 
 ## Installation
 
@@ -48,11 +48,8 @@ $ npm run start:prod
 ## Test
 
 ```bash
-# unit tests
+# unit and integration tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
