@@ -42,7 +42,6 @@ export class GoldenRaspberryAwardsController {
 
   @Get('get-producer-longer-interval-between-awards')
   getProducerLongerIntervalBetweenAwards() {
-    console.log('getProducerLongerIntervalBetweenAwards');
     return this.getProductMinMaxUseCase.execute();
   }
 

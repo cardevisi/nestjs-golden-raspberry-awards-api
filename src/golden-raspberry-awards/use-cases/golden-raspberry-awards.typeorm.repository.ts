@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 
 export interface IGoldenRaspberryAwardsRepository {
   findAll(): Promise<GoldenRaspberryAward[]>;
@@ -18,6 +18,7 @@ export class GoldenRaspberryAwardsTypeOrmRepository
     @InjectRepository(GoldenRaspberryAward)
     private readonly goldenRaspberryAwardRepository: Repository<GoldenRaspberryAward>,
   ) {}
+
   async query(query: string): Promise<any> {
     return await this.goldenRaspberryAwardRepository.query(query);
   }

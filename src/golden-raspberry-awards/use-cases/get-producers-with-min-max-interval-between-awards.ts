@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IGoldenRaspberryAwardsRepository } from './golden-raspberry-awards.typeorm.repository';
+import { SelectQueryBuilder } from 'typeorm';
+import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
 
 @Injectable()
 export class GetProducersWithMinMaxIntervalAwatdsUseCase {
