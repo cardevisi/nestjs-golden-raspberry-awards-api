@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 import crypto from 'crypto';
 
-@Entity('golden_raspberry_awards')
-export class GoldenRaspberryAward {
+@Entity('movies')
+export class Movies {
   @PrimaryColumn()
   id: string;
 
@@ -16,7 +16,7 @@ export class GoldenRaspberryAward {
   studios: string;
 
   @Column()
-  producers: string;
+  producer: string;
 
   @Column()
   winner: boolean;
@@ -26,14 +26,14 @@ export class GoldenRaspberryAward {
     year: number,
     title: string,
     studios: string,
-    producers: string,
+    producer: string,
     winner: boolean,
   ) {
     this.id = id ?? crypto.randomUUID();
     this.year = year;
     this.title = title;
     this.studios = studios;
-    this.producers = producers;
+    this.producer = producer;
     this.winner = winner;
   }
 }

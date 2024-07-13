@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GoldenRaspberryAward } from './entities/golden-raspberry-award.entity';
+import { Movies } from './entities/movies.entity';
 import { GoldenRaspberryAwardsController } from './golden-raspberry-awards.controller';
 import { CreateGoldenRaspberryAwardsUseCase } from './use-cases/create-golden-raspberry-awards';
 import { FindAllGoldenRaspberryAwardsUseCase } from './use-cases/find-all-golden-raspberry-awards';
@@ -12,7 +12,7 @@ import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-pro
 import { GoldenRaspberryAwardsTypeOrmRepository } from './use-cases/golden-raspberry-awards.typeorm.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([GoldenRaspberryAward])],
+  imports: [TypeOrmModule.forFeature([Movies])],
   controllers: [GoldenRaspberryAwardsController],
   providers: [
     ImportCsvService,

@@ -3,6 +3,6 @@ export class CreateGoldenRaspberryAwardDto {
   year: number;
   title: string;
   studios: string;
-  producers: string;
+  producer: string;
   winner: boolean;
 } //DTO = Data Transfer Object

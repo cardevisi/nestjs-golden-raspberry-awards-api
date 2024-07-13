@@ -8,6 +8,6 @@ export class UpdateGoldenRaspberryAwardDto extends PartialType(
   year: number;
   title: string;
   studios: string;
-  producers: string;
+  producer: string;
   winner: boolean;
 }

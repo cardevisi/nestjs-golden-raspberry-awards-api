@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { GoldenRaspberryAward } from './entities/golden-raspberry-award.entity';
+import { Movies } from './entities/movies.entity';
 import csvParser from 'csv-parser';
 import * as fs from 'fs';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,31 +8,34 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class ImportCsvService {
   constructor(
-    @InjectRepository(GoldenRaspberryAward)
-    private readonly goldenRaspberryAwardsRepository: Repository<GoldenRaspberryAward>,
+    @InjectRepository(Movies)
+    private readonly moviesRepository: Repository<Movies>,
   ) {}
 
   async importCsv(filePath: string): Promise<void> {
-    const GoldenRaspberryAwardsMovies: GoldenRaspberryAward[] = [];
+    const MovieList: Movies[] = [];
 
     return new Promise((resolve, rejects) => {
       fs.createReadStream(filePath)
         .pipe(csvParser({ strict: true, separator: ';' }))
         .on('data', (data) => {
-          const movie = new GoldenRaspberryAward(
-            data.id,
-            data.year,
-            data.title,
-            data.studios,
-            data.producers,
-            data.winner === 'yes' ? true : false,
-          );
-          GoldenRaspberryAwardsMovies.push(movie);
+          const producers = data.producers.split(/,|and/g);
+          producers.map((producer: string) => {
+            if (producer.trim() === '') return;
+            const producerName = producer.trim();
+            const movies = new Movies(
+              data.id,
+              data.year,
+              data.title,
+              data.studios,
+              producerName,
+              data.winner === 'yes' ? true : false,
+            );
+            MovieList.push(movies);
+          });
         })
         .on('end', async () => {
-          await this.goldenRaspberryAwardsRepository.save(
-            GoldenRaspberryAwardsMovies,
-          );
+          await this.moviesRepository.save(MovieList);
           resolve();
         })
         .on('error', (error) => {

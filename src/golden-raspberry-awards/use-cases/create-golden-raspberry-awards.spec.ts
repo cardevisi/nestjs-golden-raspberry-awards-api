@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CreateGoldenRaspberryAwardsUseCase } from './create-golden-raspberry-awards';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import { Movies } from '../entities/movies.entity';
 import {
   GoldenRaspberryAwardsTypeOrmRepository,
   IGoldenRaspberryAwardsRepository,
@@ -18,7 +18,7 @@ describe('GoldenRaspberryAwardsuseCase', () => {
         CreateGoldenRaspberryAwardsUseCase,
         GoldenRaspberryAwardsTypeOrmRepository,
         {
-          provide: getRepositoryToken(GoldenRaspberryAward),
+          provide: getRepositoryToken(Movies),
           useClass: Repository,
         },
         {
@@ -47,7 +47,7 @@ describe('GoldenRaspberryAwardsuseCase', () => {
       year: 2022,
       title: 'Title Teste',
       studios: 'Studios Teste',
-      producers: 'ProducersTeste',
+      producer: 'ProducersTeste',
       winner: true,
     };
 

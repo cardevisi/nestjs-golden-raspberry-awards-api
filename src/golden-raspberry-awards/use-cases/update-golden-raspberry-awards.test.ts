@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { UpdateGoldenRaspberryAwardsUseCase } from './update-golden-raspberry-awards';
 import { Repository } from 'typeorm';
-import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import { Movies } from '../entities/movies.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import {
   GoldenRaspberryAwardsTypeOrmRepository,
@@ -17,7 +17,7 @@ describe('UpdateGoldenRaspberryAwardsUseCase', () => {
       providers: [
         UpdateGoldenRaspberryAwardsUseCase,
         {
-          provide: getRepositoryToken(GoldenRaspberryAward),
+          provide: getRepositoryToken(Movies),
           useValue: Repository,
         },
         {
@@ -45,7 +45,7 @@ describe('UpdateGoldenRaspberryAwardsUseCase', () => {
       year: 2020,
       title: 'Golden Raspberry Awards 2020',
       studios: 'Columbia Pictures',
-      producers: 'Columbia Pictures',
+      producer: 'Columbia Pictures',
       winner: true,
     };
 

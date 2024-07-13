@@ -7,14 +7,14 @@ import { UpdateGoldenRaspberryAwardsUseCase } from './use-cases/update-golden-ra
 import { RemoveGoldenRaspberryAwardsUseCase } from './use-cases/remove-golden-raspberry-awards';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { GoldenRaspberryAward } from './entities/golden-raspberry-award.entity';
+import { Movies } from './entities/movies.entity';
 import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-producers-with-min-max-interval-between-awards';
 import { GoldenRaspberryAwardsTypeOrmRepository } from './use-cases/golden-raspberry-awards.typeorm.repository';
 
 describe('GoldenRaspberryAwardsController', () => {
   let controller: GoldenRaspberryAwardsController;
   let useCase: CreateGoldenRaspberryAwardsUseCase;
-  let repository: Repository<GoldenRaspberryAward>;
+  let repository: Repository<Movies>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -28,7 +28,7 @@ describe('GoldenRaspberryAwardsController', () => {
         RemoveGoldenRaspberryAwardsUseCase,
         GetProducersWithMinMaxIntervalAwatdsUseCase,
         {
-          provide: getRepositoryToken(GoldenRaspberryAward),
+          provide: getRepositoryToken(Movies),
           useClass: Repository,
         },
         {
@@ -44,9 +44,7 @@ describe('GoldenRaspberryAwardsController', () => {
     controller = module.get<GoldenRaspberryAwardsController>(
       GoldenRaspberryAwardsController,
     );
-    repository = module.get<Repository<GoldenRaspberryAward>>(
-      getRepositoryToken(GoldenRaspberryAward),
-    );
+    repository = module.get<Repository<Movies>>(getRepositoryToken(Movies));
   });
 
   it('should be defined', () => {
@@ -59,7 +57,7 @@ describe('GoldenRaspberryAwardsController', () => {
       year: 2022,
       title: 'Teste',
       studios: 'Teste',
-      producers: 'Teste',
+      producer: 'Teste',
       winner: true,
     };
 

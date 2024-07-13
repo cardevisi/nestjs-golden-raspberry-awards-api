@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { describe } from 'node:test';
-import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import { Movies } from '../entities/movies.entity';
 import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './get-producers-with-min-max-interval-between-awards';
 import { CreateGoldenRaspberryAwardsUseCase } from './create-golden-raspberry-awards';
 import crypto from 'crypto';
@@ -22,11 +22,11 @@ describe('GetProducerLongerIntervalBetweenAwards', () => {
         TypeOrmModule.forRoot({
           type: 'sqlite',
           database: ':memory:',
-          entities: [GoldenRaspberryAward],
+          entities: [Movies],
           logging: false,
           synchronize: true,
         }),
-        TypeOrmModule.forFeature([GoldenRaspberryAward]),
+        TypeOrmModule.forFeature([Movies]),
       ],
       providers: [
         CreateGoldenRaspberryAwardsUseCase,
@@ -54,7 +54,7 @@ describe('GetProducerLongerIntervalBetweenAwards', () => {
   });
 
   afterEach(async () => {
-    await repository.query('DELETE FROM golden_raspberry_awards');
+    await repository.query('DELETE FROM movies');
   });
 
   it('should be defined', () => {
@@ -65,119 +65,107 @@ describe('GetProducerLongerIntervalBetweenAwards', () => {
     const result = {
       min: [
         {
-          producer: 'Producer 1',
-          interval: 1,
-          previousWin: 2008,
-          followingWin: 2009,
-        },
-        {
           producer: 'Producer 2',
-          interval: 1,
-          previousWin: 2018,
-          followingWin: 2019,
+          interval: 99,
+          previousWin: 2000,
+          followingWin: 2099,
         },
       ],
       max: [
         {
           producer: 'Producer 1',
-          interval: 99,
+          interval: 109,
           previousWin: 1900,
-          followingWin: 1999,
-        },
-        {
-          producer: 'Producer 2',
-          interval: 80,
-          previousWin: 2019,
-          followingWin: 2099,
+          followingWin: 2009,
         },
       ],
     };
 
     await createGolden.execute(
-      new GoldenRaspberryAward(
+      new Movies(
         crypto.randomUUID(),
         2008,
         'Title teste',
         'Studios teste',
         'Producer 1',
-        false,
+        true,
       ),
     );
 
     await createGolden.execute(
-      new GoldenRaspberryAward(
+      new Movies(
         crypto.randomUUID(),
         2009,
         'Title teste',
         'Studios teste',
         'Producer 1',
-        false,
+        true,
       ),
     );
 
     await createGolden.execute(
-      new GoldenRaspberryAward(
+      new Movies(
         crypto.randomUUID(),
         1900,
         'Title teste',
         'Studios teste',
         'Producer 1',
-        false,
+        true,
       ),
     );
 
     await createGolden.execute(
-      new GoldenRaspberryAward(
+      new Movies(
         crypto.randomUUID(),
         1999,
         'Title teste',
         'Studios teste',
         'Producer 1',
-        false,
+        true,
       ),
     );
 
     await createGolden.execute(
-      new GoldenRaspberryAward(
+      new Movies(
         crypto.randomUUID(),
         2099,
         'Title teste',
         'Studios teste',
         'Producer 2',
-        false,
+        true,
       ),
     );
 
     await createGolden.execute(
-      new GoldenRaspberryAward(
+      new Movies(
         crypto.randomUUID(),
         2018,
         'Title teste',
         'Studios teste',
         'Producer 2',
-        false,
+        true,
       ),
     );
 
     await createGolden.execute(
-      new GoldenRaspberryAward(
+      new Movies(
         crypto.randomUUID(),
         2019,
         'Title teste',
         'Studios teste',
         'Producer 2',
-        false,
+        true,
       ),
     );
 
     await createGolden.execute(
-      new GoldenRaspberryAward(
+      new Movies(
         crypto.randomUUID(),
         2000,
         'Title teste',
         'Studios teste',
         'Producer 2',
-        false,
+        true,
       ),
     );
 

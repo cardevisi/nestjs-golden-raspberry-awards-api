@@ -6,12 +6,12 @@ CSV_FILE="movielist.csv"
 
 sqlite3 $DB_NAME <<EOF
 DROP TABLE IF EXISTS $TABLE_NAME;
-CREATE TABLE $TABLE_NAME (
+CREATE TABLE movies (
     id INTEGER PRIMARY KEY,
     title TEXT,
-    year INTEGER
-    producers TEXT
-    studios TEXT
+    year INTEGER,
+    producers TEXT,
+    studios TEXT,
     winner BOOLEAN
 );
 .mode csv

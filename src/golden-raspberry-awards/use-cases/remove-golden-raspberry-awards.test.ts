@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RemoveGoldenRaspberryAwardsUseCase } from './remove-golden-raspberry-awards';
-import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import { Movies } from '../entities/movies.entity';
 import {
   GoldenRaspberryAwardsTypeOrmRepository,
   IGoldenRaspberryAwardsRepository,
@@ -17,7 +17,7 @@ describe('RemoveGoldenRaspberryAwardsUseCase', () => {
       providers: [
         RemoveGoldenRaspberryAwardsUseCase,
         {
-          provide: getRepositoryToken(GoldenRaspberryAward),
+          provide: getRepositoryToken(Movies),
           useClass: Repository,
         },
         {

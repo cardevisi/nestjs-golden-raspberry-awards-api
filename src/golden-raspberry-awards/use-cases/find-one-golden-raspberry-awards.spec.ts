@@ -3,7 +3,7 @@ import { describe } from 'node:test';
 import { FindOneGoldenRaspBarrelAwardUseCase } from './find-one-golden-raspberry-awards';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import { Movies } from '../entities/movies.entity';
 import {
   GoldenRaspberryAwardsTypeOrmRepository,
   IGoldenRaspberryAwardsRepository,
@@ -18,7 +18,7 @@ describe('FindOneGoldenRaspberryAwardsUseCase', () => {
       providers: [
         FindOneGoldenRaspBarrelAwardUseCase,
         {
-          provide: getRepositoryToken(GoldenRaspberryAward),
+          provide: getRepositoryToken(Movies),
           useClass: Repository,
         },
         {
@@ -46,7 +46,7 @@ describe('FindOneGoldenRaspberryAwardsUseCase', () => {
       year: 2022,
       title: 'Title Teste',
       studios: 'Studios Teste',
-      producers: 'ProducersTeste',
+      producer: 'ProducersTeste',
       winner: true,
     };
 

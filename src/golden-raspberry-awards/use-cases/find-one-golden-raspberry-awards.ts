@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { GoldenRaspberryAward } from '../entities/golden-raspberry-award.entity';
+import { Movies } from '../entities/movies.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IGoldenRaspberryAwardsRepository } from './golden-raspberry-awards.typeorm.repository';
 
