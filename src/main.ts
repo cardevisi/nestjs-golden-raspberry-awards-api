@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const importCsvService = app.get(ImportCsvService);
-  importCsvService.importCsv('movielist.csv');
+  importCsvService.importCsv('src/resource/movielist.csv');
 
   console.log('Date imported');
 

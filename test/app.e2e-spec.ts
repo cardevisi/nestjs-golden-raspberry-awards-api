@@ -38,7 +38,7 @@ describe('AppController (e2e)', () => {
     await app.init();
 
     const projectRoot = process.cwd();
-    const csvFilePath = path.join(projectRoot, 'movielist.csv');
+    const csvFilePath = path.join(projectRoot, 'src/resource/movielist.csv');
     const readResult = await readCsvFile(csvFilePath);
 
     createGolden = moduleFixture.get<CreateMovieUseCase>(CreateMovieUseCase);
