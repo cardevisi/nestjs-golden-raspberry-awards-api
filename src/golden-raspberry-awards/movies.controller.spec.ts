@@ -8,7 +8,7 @@ import { RemoveMovieUseCase } from './use-cases/remove-movie';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Movies } from './entities/movies.entity';
-import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './use-cases/get-producer-with-min-max-interval-between-awards';
+import { GetProducerIntervalBetweenAwardsUseCase } from './use-cases/get-producer-interval-between-awards';
 import { MoviesTypeOrmRepository } from './use-cases/golden-raspberry-awards.typeorm.repository';
 
 describe('MoviesController', () => {
@@ -25,7 +25,7 @@ describe('MoviesController', () => {
         CreateMovieUseCase,
         UpdateMovieUseCase,
         RemoveMovieUseCase,
-        GetProducersWithMinMaxIntervalAwatdsUseCase,
+        GetProducerIntervalBetweenAwardsUseCase,
         {
           provide: getRepositoryToken(Movies),
           useClass: Repository,

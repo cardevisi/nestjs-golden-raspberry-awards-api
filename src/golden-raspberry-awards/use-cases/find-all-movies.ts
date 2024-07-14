@@ -5,9 +5,9 @@ import { IMoviesRepository } from './golden-raspberry-awards.typeorm.repository'
 export class FindAllMoviesUseCase {
   constructor(
     @Inject('IMoviesRepository')
-    private goldenRaspberryAwardRepository: IMoviesRepository,
+    private moviesRepository: IMoviesRepository,
   ) {}
-  execute() {
-    return this.goldenRaspberryAwardRepository.findAll();
+  async execute() {
+    return await this.moviesRepository.findAll();
   }
 }

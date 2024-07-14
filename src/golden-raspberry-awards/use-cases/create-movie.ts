@@ -8,7 +8,7 @@ export class CreateMovieUseCase {
     @Inject('IMoviesRepository')
     private readonly moviesRepository: IMoviesRepository,
   ) {}
-  execute(input: Movies) {
+  async execute(input: Movies) {
     const createGoldenRaspberryAwardDto = new Movies(
       input.id,
       input.year,
@@ -17,7 +17,6 @@ export class CreateMovieUseCase {
       input.producer,
       input.winner,
     );
-
-    return this.moviesRepository.create(createGoldenRaspberryAwardDto);
+    return await this.moviesRepository.create(createGoldenRaspberryAwardDto);
   }
 }

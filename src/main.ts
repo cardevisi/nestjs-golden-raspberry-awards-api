@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ImportCsvService } from './golden-raspberry-awards/import-csv.service';
+import { ImportCsvService } from './golden-raspberry-awards/infra/import-csv.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

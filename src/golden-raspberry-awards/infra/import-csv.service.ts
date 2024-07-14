@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Movies } from './entities/movies.entity';
+import { Movies } from '../entities/movies.entity';
 import csvParser from 'csv-parser';
 import * as fs from 'fs';
 import { InjectRepository } from '@nestjs/typeorm';

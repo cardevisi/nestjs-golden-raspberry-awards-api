@@ -15,31 +15,31 @@ export interface IMoviesRepository {
 export class MoviesTypeOrmRepository implements IMoviesRepository {
   constructor(
     @InjectRepository(Movies)
-    private readonly goldenRaspberryAwardRepository: Repository<Movies>,
+    private readonly moviesRepository: Repository<Movies>,
   ) {}
 
   queryBuilder(alias: string): SelectQueryBuilder<any> {
-    return this.goldenRaspberryAwardRepository.createQueryBuilder(alias);
+    return this.moviesRepository.createQueryBuilder(alias);
   }
 
   async query(query: string): Promise<any> {
-    return await this.goldenRaspberryAwardRepository.query(query);
+    return await this.moviesRepository.query(query);
   }
   async findAll(): Promise<Movies[]> {
-    return await this.goldenRaspberryAwardRepository.find();
+    return await this.moviesRepository.find();
   }
   async findOne(id: string): Promise<Movies> {
-    return await this.goldenRaspberryAwardRepository.findOne({
+    return await this.moviesRepository.findOne({
       where: { id },
     });
   }
   async create(input: Movies): Promise<Movies> {
-    return await this.goldenRaspberryAwardRepository.save(input);
+    return await this.moviesRepository.save(input);
   }
   async update(id: string, input: Movies): Promise<any> {
-    return await this.goldenRaspberryAwardRepository.update(id, input);
+    return await this.moviesRepository.update(id, input);
   }
   async remove(id: string): Promise<any> {
-    return await this.goldenRaspberryAwardRepository.delete(id);
+    return await this.moviesRepository.delete(id);
   }
 }
