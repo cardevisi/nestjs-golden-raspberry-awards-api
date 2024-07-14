@@ -1,40 +1,36 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FindAllGoldenRaspberryAwardsUseCase } from './find-all-golden-raspberry-awards';
+import { FindAllMoviesUseCase } from './find-all-movies';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movies } from '../entities/movies.entity';
 import {
-  GoldenRaspberryAwardsTypeOrmRepository,
-  IGoldenRaspberryAwardsRepository,
+  MoviesTypeOrmRepository,
+  IMoviesRepository,
 } from './golden-raspberry-awards.typeorm.repository';
 
-describe('FindAllGoldenRaspberryAwardsUseCase', () => {
+describe('FindAllMoviesUseCase', () => {
   describe('execute', () => {
-    let useCase: FindAllGoldenRaspberryAwardsUseCase;
-    let repository: IGoldenRaspberryAwardsRepository;
+    let useCase: FindAllMoviesUseCase;
+    let repository: IMoviesRepository;
 
     beforeEach(async () => {
       const module: TestingModule = await Test.createTestingModule({
         providers: [
-          FindAllGoldenRaspberryAwardsUseCase,
+          FindAllMoviesUseCase,
           {
             provide: getRepositoryToken(Movies),
             useClass: Repository,
           },
           {
-            provide: 'IGoldenRaspberryAwardsRepository',
-            useClass: GoldenRaspberryAwardsTypeOrmRepository,
+            provide: 'IMoviesRepository',
+            useClass: MoviesTypeOrmRepository,
           },
         ],
       }).compile();
 
-      useCase = module.get<FindAllGoldenRaspberryAwardsUseCase>(
-        FindAllGoldenRaspberryAwardsUseCase,
-      );
+      useCase = module.get<FindAllMoviesUseCase>(FindAllMoviesUseCase);
 
-      repository = module.get<IGoldenRaspberryAwardsRepository>(
-        'IGoldenRaspberryAwardsRepository',
-      );
+      repository = module.get<IMoviesRepository>('IMoviesRepository');
     });
 
     it('should be defined', () => {

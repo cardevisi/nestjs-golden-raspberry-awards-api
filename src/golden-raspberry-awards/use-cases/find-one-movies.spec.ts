@@ -1,17 +1,17 @@
 import { Test } from '@nestjs/testing';
 import { describe } from 'node:test';
-import { FindOneGoldenRaspBarrelAwardUseCase } from './find-one-golden-raspberry-awards';
+import { FindOneGoldenRaspBarrelAwardUseCase } from './find-one-movies';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Movies } from '../entities/movies.entity';
 import {
-  GoldenRaspberryAwardsTypeOrmRepository,
-  IGoldenRaspberryAwardsRepository,
+  MoviesTypeOrmRepository,
+  IMoviesRepository,
 } from './golden-raspberry-awards.typeorm.repository';
 
-describe('FindOneGoldenRaspberryAwardsUseCase', () => {
+describe('FindOneMoviesUseCase', () => {
   let useCase: FindOneGoldenRaspBarrelAwardUseCase;
-  let repository: IGoldenRaspberryAwardsRepository;
+  let repository: IMoviesRepository;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -22,8 +22,8 @@ describe('FindOneGoldenRaspberryAwardsUseCase', () => {
           useClass: Repository,
         },
         {
-          provide: 'IGoldenRaspberryAwardsRepository',
-          useClass: GoldenRaspberryAwardsTypeOrmRepository,
+          provide: 'IMoviesRepository',
+          useClass: MoviesTypeOrmRepository,
         },
       ],
     }).compile();
@@ -31,9 +31,7 @@ describe('FindOneGoldenRaspberryAwardsUseCase', () => {
     useCase = module.get<FindOneGoldenRaspBarrelAwardUseCase>(
       FindOneGoldenRaspBarrelAwardUseCase,
     );
-    repository = module.get<IGoldenRaspberryAwardsRepository>(
-      'IGoldenRaspberryAwardsRepository',
-    );
+    repository = module.get<IMoviesRepository>('IMoviesRepository');
   });
 
   it('should be defined', () => {

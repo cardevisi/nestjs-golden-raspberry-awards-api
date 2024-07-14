@@ -2,19 +2,19 @@ import { Test } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { describe } from 'node:test';
 import { Movies } from '../entities/movies.entity';
-import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './get-producers-with-min-max-interval-between-awards';
-import { CreateGoldenRaspberryAwardsUseCase } from './create-golden-raspberry-awards';
+import { GetProducersWithMinMaxIntervalAwatdsUseCase } from './get-producer-with-min-max-interval-between-awards';
+import { CreateMovieUseCase } from './create-movie';
 import crypto from 'crypto';
-import { FindAllGoldenRaspberryAwardsUseCase } from './find-all-golden-raspberry-awards';
+import { FindAllMoviesUseCase } from './find-all-movies';
 import {
-  GoldenRaspberryAwardsTypeOrmRepository,
-  IGoldenRaspberryAwardsRepository,
+  MoviesTypeOrmRepository,
+  IMoviesRepository,
 } from './golden-raspberry-awards.typeorm.repository';
 
 describe('GetProducerLongerIntervalBetweenAwards', () => {
   let useCase: GetProducersWithMinMaxIntervalAwatdsUseCase;
-  let repository: IGoldenRaspberryAwardsRepository;
-  let createGolden: CreateGoldenRaspberryAwardsUseCase;
+  let repository: IMoviesRepository;
+  let createGolden: CreateMovieUseCase;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -29,13 +29,13 @@ describe('GetProducerLongerIntervalBetweenAwards', () => {
         TypeOrmModule.forFeature([Movies]),
       ],
       providers: [
-        CreateGoldenRaspberryAwardsUseCase,
+        CreateMovieUseCase,
         GetProducersWithMinMaxIntervalAwatdsUseCase,
-        FindAllGoldenRaspberryAwardsUseCase,
-        GoldenRaspberryAwardsTypeOrmRepository,
+        FindAllMoviesUseCase,
+        MoviesTypeOrmRepository,
         {
-          provide: 'IGoldenRaspberryAwardsRepository',
-          useExisting: GoldenRaspberryAwardsTypeOrmRepository,
+          provide: 'IMoviesRepository',
+          useExisting: MoviesTypeOrmRepository,
         },
       ],
     }).compile();
@@ -44,13 +44,9 @@ describe('GetProducerLongerIntervalBetweenAwards', () => {
       GetProducersWithMinMaxIntervalAwatdsUseCase,
     );
 
-    createGolden = module.get<CreateGoldenRaspberryAwardsUseCase>(
-      CreateGoldenRaspberryAwardsUseCase,
-    );
+    createGolden = module.get<CreateMovieUseCase>(CreateMovieUseCase);
 
-    repository = module.get<IGoldenRaspberryAwardsRepository>(
-      'IGoldenRaspberryAwardsRepository',
-    );
+    repository = module.get<IMoviesRepository>('IMoviesRepository');
   });
 
   afterEach(async () => {

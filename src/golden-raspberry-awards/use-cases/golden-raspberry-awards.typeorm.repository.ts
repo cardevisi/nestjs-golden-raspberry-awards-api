@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Movies } from '../entities/movies.entity';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 
-export interface IGoldenRaspberryAwardsRepository {
+export interface IMoviesRepository {
   queryBuilder(alias?: string): SelectQueryBuilder<any>;
   findAll(): Promise<Movies[]>;
   findOne(id: string): Promise<Movies>;
@@ -12,9 +12,7 @@ export interface IGoldenRaspberryAwardsRepository {
   query(query: string): Promise<any>;
 }
 
-export class GoldenRaspberryAwardsTypeOrmRepository
-  implements IGoldenRaspberryAwardsRepository
-{
+export class MoviesTypeOrmRepository implements IMoviesRepository {
   constructor(
     @InjectRepository(Movies)
     private readonly goldenRaspberryAwardRepository: Repository<Movies>,

@@ -1,15 +1,15 @@
-GET http://localhost:3000/golden-raspberry-awards
+GET http://localhost:3000/movie-awards
 
 
 ###
-GET http://localhost:3000/golden-raspberry-awards/826ecb9f-5988-4b34-be41-8a677d3950c0
+GET http://localhost:3000/movie-awards/826ecb9f-5988-4b34-be41-8a677d3950c0
 
 ### get-producer
-GET  http://localhost:3000/golden-raspberry-awards/get-producer-longer-interval-between-awards
+GET  http://localhost:3000/movie-awards/interval-between-awards
 
 
 ###
-POST http://localhost:3000/golden-raspberry-awards
+POST http://localhost:3000/movie-awards
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3000/golden-raspberry-awards/826ecb9f-5988-4b34-be41-8a677d3950c0
+PATCH http://localhost:3000/movie-awards/826ecb9f-5988-4b34-be41-8a677d3950c0
 Content-Type: application/json
 
 {

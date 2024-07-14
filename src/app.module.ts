@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { GoldenRaspberryAwardsModule } from './golden-raspberry-awards/golden-raspberry-awards.module';
+import { MoviesModule } from './golden-raspberry-awards/movies.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movies } from './golden-raspberry-awards/entities/movies.entity';
 
@@ -13,9 +11,9 @@ import { Movies } from './golden-raspberry-awards/entities/movies.entity';
       entities: [Movies],
       synchronize: true,
     }),
-    GoldenRaspberryAwardsModule,
+    MoviesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

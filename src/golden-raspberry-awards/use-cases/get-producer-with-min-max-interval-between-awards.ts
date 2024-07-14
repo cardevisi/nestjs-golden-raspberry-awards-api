@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IGoldenRaspberryAwardsRepository } from './golden-raspberry-awards.typeorm.repository';
+import { IMoviesRepository } from './golden-raspberry-awards.typeorm.repository';
 import { SelectQueryBuilder } from 'typeorm';
 import { Movies } from '../entities/movies.entity';
 
@@ -7,8 +7,8 @@ import { Movies } from '../entities/movies.entity';
 export class GetProducersWithMinMaxIntervalAwatdsUseCase {
   MIN_QUANTITY_OF_AWARDS = 2;
   constructor(
-    @Inject('IGoldenRaspberryAwardsRepository')
-    private readonly goldenRaspberryAwardRepository: IGoldenRaspberryAwardsRepository,
+    @Inject('IMoviesRepository')
+    private readonly goldenRaspberryAwardRepository: IMoviesRepository,
   ) {}
 
   async execute() {
