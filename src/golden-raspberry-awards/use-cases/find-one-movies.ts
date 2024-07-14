@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IMoviesRepository } from './golden-raspberry-awards.typeorm.repository';
 
 @Injectable()
-export class FindOneGoldenRaspBarrelAwardUseCase {
+export class FindOneMovieUseCase {
   constructor(
     @Inject('IMoviesRepository')
     private readonly findOneMoviesRepository: IMoviesRepository,

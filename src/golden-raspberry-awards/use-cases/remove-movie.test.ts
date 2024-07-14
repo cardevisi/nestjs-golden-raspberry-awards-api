@@ -28,7 +28,6 @@ describe('RemoveMoviesUseCase', () => {
     }).compile();
 
     useCase = module.get<RemoveMovieUseCase>(RemoveMovieUseCase);
-
     repository = module.get<IMoviesRepository>('IMoviesRepository');
   });
 

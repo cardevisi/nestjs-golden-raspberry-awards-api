@@ -38,7 +38,7 @@ describe('MoviesuseCase', () => {
   });
 
   it('should create an award', async () => {
-    const createGoldenRaspberryAwardDto = {
+    const createMovieDto = {
       id: '9a5f6d5d-9a9a-11ed-afa1-0242ac120002',
       year: 2022,
       title: 'Title Teste',
@@ -47,11 +47,9 @@ describe('MoviesuseCase', () => {
       winner: true,
     };
 
-    jest
-      .spyOn(repository, 'create')
-      .mockResolvedValue(createGoldenRaspberryAwardDto);
+    jest.spyOn(repository, 'create').mockResolvedValue(createMovieDto);
 
-    const result = await useCase.execute(createGoldenRaspberryAwardDto);
+    const result = await useCase.execute(createMovieDto);
     expect(result).toBeDefined();
   });
 });

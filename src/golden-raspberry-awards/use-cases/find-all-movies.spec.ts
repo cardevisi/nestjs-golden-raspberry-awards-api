@@ -29,7 +29,6 @@ describe('FindAllMoviesUseCase', () => {
       }).compile();
 
       useCase = module.get<FindAllMoviesUseCase>(FindAllMoviesUseCase);
-
       repository = module.get<IMoviesRepository>('IMoviesRepository');
     });
 

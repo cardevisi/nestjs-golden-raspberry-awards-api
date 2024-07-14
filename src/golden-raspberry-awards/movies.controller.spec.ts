@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MoviesController } from './movies.controller';
 import { CreateMovieUseCase } from './use-cases/create-movie';
 import { FindAllMoviesUseCase } from './use-cases/find-all-movies';
-import { FindOneGoldenRaspBarrelAwardUseCase } from './use-cases/find-one-movies';
+import { FindOneMovieUseCase } from './use-cases/find-one-movies';
 import { UpdateMovieUseCase } from './use-cases/update-movie';
 import { RemoveMovieUseCase } from './use-cases/remove-movie';
 import { Repository } from 'typeorm';
@@ -21,7 +21,7 @@ describe('MoviesController', () => {
       controllers: [MoviesController],
       providers: [
         FindAllMoviesUseCase,
-        FindOneGoldenRaspBarrelAwardUseCase,
+        FindOneMovieUseCase,
         CreateMovieUseCase,
         UpdateMovieUseCase,
         RemoveMovieUseCase,

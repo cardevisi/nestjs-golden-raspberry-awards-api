@@ -11,7 +11,7 @@ import {
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { CreateMovieUseCase } from './use-cases/create-movie';
 import { FindAllMoviesUseCase } from './use-cases/find-all-movies';
-import { FindOneGoldenRaspBarrelAwardUseCase } from './use-cases/find-one-movies';
+import { FindOneMovieUseCase } from './use-cases/find-one-movies';
 import { RemoveMovieUseCase } from './use-cases/remove-movie';
 import { UpdateMovieUseCase } from './use-cases/update-movie';
 import { UpdateMovieDto } from './dto/update-movie.dto';
@@ -22,7 +22,7 @@ export class MoviesController {
   constructor(
     private readonly createMoviesUseCase: CreateMovieUseCase,
     private readonly findAllMoviesUseCase: FindAllMoviesUseCase,
-    private readonly findOneMoviesUseCase: FindOneGoldenRaspBarrelAwardUseCase,
+    private readonly findOneMoviesUseCase: FindOneMovieUseCase,
     private readonly removeMoviesUseCase: RemoveMovieUseCase,
     private readonly updateMoviesUseCase: UpdateMovieUseCase,
     private readonly getProducerIntetrvalBetweenAwardsUseCase: GetProducerIntervalBetweenAwardsUseCase,

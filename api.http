@@ -5,7 +5,7 @@ GET http://localhost:3000/movie-awards
 GET http://localhost:3000/movie-awards/826ecb9f-5988-4b34-be41-8a677d3950c0
 
 ### get-producer
-GET  http://localhost:3000/movie-awards/interval-between-awards
+GET  http://localhost:3000/movie-awards/producer-interval-between-awards
 
 
 ###
