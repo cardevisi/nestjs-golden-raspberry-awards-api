@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Movies } from './entities/movies.entity';
 import { GetProducerIntervalBetweenAwardsUseCase } from './use-cases/get-producer-interval-between-awards';
-import { MoviesTypeOrmRepository } from './use-cases/golden-raspberry-awards.typeorm.repository';
+import { MoviesTypeOrmRepository } from './use-cases/movies.typeorm.repository';
 
 describe('MoviesController', () => {
   let useCase: CreateMovieUseCase;

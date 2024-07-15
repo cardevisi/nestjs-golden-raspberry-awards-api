@@ -6,7 +6,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import {
   MoviesTypeOrmRepository,
   IMoviesRepository,
-} from './golden-raspberry-awards.typeorm.repository';
+} from './movies.typeorm.repository';
 
 describe('UpdateMoviesUseCase', () => {
   let useCase: UpdateMovieUseCase;

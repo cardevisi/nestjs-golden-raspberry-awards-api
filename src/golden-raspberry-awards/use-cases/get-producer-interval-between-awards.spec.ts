@@ -8,7 +8,7 @@ import { FindAllMoviesUseCase } from './find-all-movies';
 import {
   MoviesTypeOrmRepository,
   IMoviesRepository,
-} from './golden-raspberry-awards.typeorm.repository';
+} from './movies.typeorm.repository';
 
 describe('GetProducerLongerIntervalBetweenAwards', () => {
   let getIntervalBetweenAwards: GetProducerIntervalBetweenAwardsUseCase;

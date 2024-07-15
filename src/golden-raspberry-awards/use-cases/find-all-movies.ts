@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IMoviesRepository } from './golden-raspberry-awards.typeorm.repository';
+import { IMoviesRepository } from './movies.typeorm.repository';
 
 @Injectable()
 export class FindAllMoviesUseCase {

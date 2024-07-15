@@ -6,7 +6,7 @@ import { Movies } from '../entities/movies.entity';
 import {
   MoviesTypeOrmRepository,
   IMoviesRepository,
-} from './golden-raspberry-awards.typeorm.repository';
+} from './movies.typeorm.repository';
 
 describe('RemoveMoviesUseCase', () => {
   let useCase: RemoveMovieUseCase;

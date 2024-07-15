@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IMoviesRepository } from './golden-raspberry-awards.typeorm.repository';
+import { IMoviesRepository } from './movies.typeorm.repository';
 
 type Movie = {
   interval_type: string;
@@ -39,7 +39,7 @@ export class GetProducerIntervalBetweenAwardsUseCase {
         FROM
           WinnersMovies
         GROUP BY producer
-        HAVING COUNT(*) >= 2
+        HAVING COUNT(winner) >= 2
         ORDER BY interval DESC
        )
         SELECT

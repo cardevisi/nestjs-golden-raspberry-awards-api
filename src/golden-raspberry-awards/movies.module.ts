@@ -7,7 +7,7 @@ import { FindAllMoviesUseCase } from './use-cases/find-all-movies';
 import { ImportCsvService } from './infra/import-csv.service';
 import { FindOneMovieUseCase } from './use-cases/find-one-movies';
 import { GetProducerIntervalBetweenAwardsUseCase } from './use-cases/get-producer-interval-between-awards';
-import { MoviesTypeOrmRepository } from './use-cases/golden-raspberry-awards.typeorm.repository';
+import { MoviesTypeOrmRepository } from './use-cases/movies.typeorm.repository';
 import { RemoveMovieUseCase } from './use-cases/remove-movie';
 import { UpdateMovieUseCase } from './use-cases/update-movie';
 

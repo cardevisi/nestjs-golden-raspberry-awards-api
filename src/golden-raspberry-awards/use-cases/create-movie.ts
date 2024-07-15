@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Movies } from '../entities/movies.entity';
-import { IMoviesRepository } from './golden-raspberry-awards.typeorm.repository';
+import { IMoviesRepository } from './movies.typeorm.repository';
 
 @Injectable()
 export class CreateMovieUseCase {
